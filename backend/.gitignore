@@ -1,8 +1,0 @@
-// directories
-requests
-node_modules
-
-// files
-index_comentada.js
-mongo.js
-.env
