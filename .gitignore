@@ -1,1 +1,7 @@
+// directories
 node_modules
+requests
+
+// files
+mongo.js
+.env
