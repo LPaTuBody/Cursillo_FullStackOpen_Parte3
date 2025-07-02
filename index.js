@@ -7,7 +7,7 @@ const app = express()
 
 // Middlewares
 app.use(express.static('dist'))
-app.use(express.json()) 
+app.use(express.json())
 app.use(cors())
 
 const requestLogger = (request, response, next) => {
@@ -43,7 +43,7 @@ app.post('/api/notes', (request, response, next) => {
   }
   const note = new Note({
     content: body.content,
-    important: body.important || false 
+    important: body.important || false
   })
   note.save()
   .then(savedNote => response.json(savedNote))
@@ -52,20 +52,20 @@ app.post('/api/notes', (request, response, next) => {
 
 app.delete('/api/notes/:id', (req, res, next) => {
   Note.findByIdAndDelete(req.params.id)
-  .then(r => res.status(204).end())
+  .then(() => res.status(204).end())
   .catch(error => next(error))
 })
 
 app.put('/api/notes/:id', (request, response, next) => {
   const { content, important } = request.body
   Note.findByIdAndUpdate(
-    request.params.id, 
+    request.params.id,
     { content, important },
     { new: true, runValidators: true, context: 'query' }
   )
   .then(updatedNote => response.json(updatedNote))
   .catch(error => next(error))
-}) 
+})
 
 // Another middlewares to handle errors
 const unknownEndpoint = (request, response) => {
@@ -86,6 +86,6 @@ app.use(errorHandler)
 
 // Port configuration and server start
 const PORT = process.env.PORT
-app.listen(PORT, () =>{
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
