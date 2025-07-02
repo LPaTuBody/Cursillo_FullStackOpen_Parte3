@@ -56,8 +56,8 @@ app.get('/api/persons/:id', (req, res, next) => {
 app.put('/api/persons/:id', (req, res, next) => {
     const { name, number } = req.body
     Person.findByIdAndUpdate(
-        req.params.id, 
-        { name, number }, 
+        req.params.id,
+        { name, number },
         { new: true, runValidators: true, context: 'query' }
     )
     .then(updated => res.json(updated))
@@ -76,7 +76,7 @@ app.post('/api/persons', (req, res, next) => {
         newPerson.save()
         .then(savedPerson => res.json(savedPerson))
         .catch(err => next(err))
-    }    
+    }
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
@@ -106,6 +106,6 @@ app.use(errorHandler)
 
 // Port configuration
 const PORT = process.env.PORT
-app.listen(PORT, () =>{
+app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
